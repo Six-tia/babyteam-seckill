@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tiaedu.babyteamseckill.dao.PromotionSeckillDao">
+    <select id = "findUnstartedSeckill" resultType="com.tiaedu.babyteamseckill.entity.PromotionSeckill">
+        select * from t_promotion_seckill where now() between start_time and end_time and status = 0
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="com.tiaedu.babyteamseckill.entity.PromotionSeckill">
+        select * from t_promotion_seckill where ps_id = #{id}
+    </select>
+
+    <update id = "update" parameterType="com.tiaedu.babyteamseckill.entity.PromotionSeckill">
+        update t_promotion_seckill
+            set status = ${status}
+            where ps_id = ${psId}
+    </update>
+</mapper>
