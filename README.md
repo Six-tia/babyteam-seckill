@@ -25,6 +25,25 @@
 3. 设计Exception类，处理各种异常情况
 4. JMeter压力测试
 
+# MQ流量削峰
+
+*RabbitMQ*
+
+---
+
+##流量冲击示意
+秒杀用户 --> 用户确权（1000/s）--> 订单系统（200/s）
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(同步等待）
+
+##流量削峰示意
+秒杀用户 --> 用户确权（1000/s）--> MQ <-- 订单系统（200/s）
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(异步处理）
+
+##实现思路
+1. 用户秒杀到商品（list-1，set+1），将数据存储到队列中
+2. 使用工厂模式，设置prefetch值，orderConsumer进行异步消费
+3. 引入sweetalert控件，实现秒杀成功后，提示等待和等待一段时间后成功与失败的不同处理
+
 
 
 
